@@ -1,17 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Principal;
 
 namespace MovieFinder.Models
 {
-    public class User
+    public class User:IdentityUser<int>
     {
-        public int Id { get; set; }
-        [Column(TypeName = "nvarchar(200)")]
-        public string Name { get; set; }
-        [Column(TypeName = "nvarchar(200)")]
-        public string Email { get; set; }
-        [Column(TypeName = "nvarchar(200)")]
-        public string Password { get; set; }
-        public string? Phone { get; set; }
+       
 
     }
 }

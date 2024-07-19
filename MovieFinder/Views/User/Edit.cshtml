@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using MovieFinder.Models.Forms;
+@model UserRolesForm
+
+@{
+    var roles = Model;
+    var user = ViewData["user"] as User;
+
+}
+<partial name="_DashboardNavBar" />
+<section class="text-amber-200 body-font ">
+    <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
+
+        <form asp-controller="User" asp-action="EditUsersRole" asp-route-id="@user.Id" class="w-2/3 bg-gray-300/10  rounded-lg p-8 flex flex-col m-auto">
+            <h2 class="text-amber-300 text-xl font-medium title-font mb-5">@user.UserName roles:</h2>
+            @for (int i = 0; i < roles.UserRoles.Count; i++)
+            {
+                @Html.HiddenFor(m => m.UserRoles[i].Name)
+                <div class="form-check mb-3">
+                    @Html.LabelFor(m => m.UserRoles[i].IsActive, Model.UserRoles[i].Name, new { @class = "form-check-label" })
+                    @Html.CheckBoxFor(m => m.UserRoles[i].IsActive, new { @class = "form-check-input" })
+
+                </div>
+            }
+            
+
+            <button class="text-white m-auto w-1/4 bg-amber-400 border-0 py-2 px-8  hover:bg-amber-500 rounded text-lg">Save</button>
+
+        </form>
+    </div>
+</section>
+
+
+
+

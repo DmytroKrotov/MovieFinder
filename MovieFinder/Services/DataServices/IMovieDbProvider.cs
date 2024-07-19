@@ -34,6 +34,12 @@ namespace MovieFinder.Services.DataServices
         public void CreateGenre(Genre genre);
         public void DeleteGenre(int id);
         public void UpdateGenre(Genre genre);
+        //GenreName//////////////////////////////////
+        public IEnumerable<GenreName> GetGenreNames();
+        public GenreName GetGenreName(int id);
+        public void CreateGenreName(GenreName genreName);
+        public void DeleteGenreName(int id);
+        public void UpdateGenreName(GenreName genreName);
         //Image//////////////////////////////////
         public IEnumerable<Image> GetImages();
         public Image GetImage(int id);
@@ -77,5 +83,12 @@ namespace MovieFinder.Services.DataServices
         public void CreateWorldRating(WorldRating worldRating);
         public void DeleteWorldRating(int id);
         public void UpdateWorldRating(WorldRating worldRating);
+        
+        //WorldRatingNames//////////////////////////////////
+        public IEnumerable<WorldRatingName> GetWorldRatingNames();
+        public WorldRatingName GetWorldRatingName(int id);
+        public void CreateWorldRatingName(WorldRatingName worldRatingName);
+        public void DeleteWorldRatingName(int id);
+        public void UpdateWorldRatingName(WorldRatingName worldRatingName);
     }
 }

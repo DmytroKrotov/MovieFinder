@@ -1,0 +1,93 @@
+﻿@using MovieFinder.Models.Forms
+@model AddMovieForm
+
+
+@{
+    ViewData["Title"] = "Dashboard";
+    List<Actor> actors=ViewData["Actors"] as List<Actor>;
+    List<WorldRatingName> worldRatings=ViewData["WorldRatingNames"] as List<WorldRatingName>;
+    List<GenreName> genres=ViewData["GenreNames"] as List<GenreName>;
+
+    var m = Model;
+    
+}
+
+<section class="text-amber-200 body-font ">
+    <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
+       
+        <form method="POST" asp-controller="Dashboard" asp-action="CreateMoviesManager" enctype="multipart/form-data" class="w-2/3 bg-gray-300/10  rounded-lg p-8 flex flex-col m-auto">
+             <h2 class="text-amber-300 text-xl font-medium title-font mb-5">New movie</h2>
+           
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Name, new { @class = "leading-7 text-base text-gray-300" })
+                @Html.TextBoxFor(m => m.Name, new { @class = "w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" })
+                @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-orange-500" })
+            </div>
+            <div class="mb-3 text-black">
+                @Html.LabelFor(m => m.Premiere, new { @class = "leading-7 text-base text-gray-300" })
+                <br/>
+                @Html.EditorFor(m => m.Premiere.Date, new { @class = "w-full text-gray-900" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Country, new { @class = "leading-7 text-base text-gray-300" })
+                @Html.TextBoxFor(m => m.Country, new { @class = "w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" })
+                @Html.ValidationMessageFor(m => m.Country, null, new { @class = "text-orange-500" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Studio, new { @class = "leading-7 text-base text-gray-300" })
+                @Html.TextBoxFor(m => m.Studio, new { @class = "w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" })
+                @Html.ValidationMessageFor(m => m.Studio, null, new { @class = "text-orange-500" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Producer, new { @class = "leading-7 text-base text-gray-300" })
+                @Html.TextBoxFor(m => m.Producer, new { @class = "w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" })
+                @Html.ValidationMessageFor(m => m.Producer, null, new { @class = "text-orange-500" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(m => m.FullDescription, new { @class = "leading-7 text-base text-gray-300" })
+                @Html.TextAreaFor(m => m.FullDescription, new { @class = "w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out", @rows = "5" })
+                @Html.ValidationMessageFor(m => m.FullDescription, null, new { @class = "text-orange-500" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(m => m.ShortDescription, new { @class = "leading-7 text-base text-gray-300" })
+                @Html.TextAreaFor(m => m.ShortDescription, new { @class = "w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out", @rows = "5" })
+                @Html.ValidationMessageFor(m => m.ShortDescription, null, new { @class = "text-orange-500" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Money, new { @class = "leading-7 text-base text-gray-300" })
+                @Html.TextBoxFor(m => m.Money, new { @class = "w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" })
+                @Html.ValidationMessageFor(m => m.Money, null, new { @class = "text-orange-500" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Image, new { @class = "leading-7 text-base text-gray-300" })
+                @Html.TextBoxFor(m => m.Image, new { @class = "w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out", type = "file", accept = ".jpg,.png,.jpeg,.jfif" })
+                @Html.ValidationMessageFor(m => m.Image, null, new { @class = "text-danger" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Actors, new { @class = "leading-7 text-base text-gray-300" })
+                @Html.ListBoxFor(m => m.Actors, new SelectList(actors, "Id", "Name", "LastName"), new { @class = "w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out", multiple = "multiple" })
+
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(m => m.WorldRatingNames, new { @class = "leading-7 text-base text-gray-300" })
+                @Html.DropDownListFor(m => m.WorldRatingNames, new SelectList(worldRatings, "Id", "Name"), new { @class = "w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out", multiple = "multiple" })
+
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(m => m.GenreNames, new { @class = "leading-7 text-base text-gray-300" })
+                @Html.ListBoxFor(m => m.GenreNames, new SelectList(genres, "Id", "Name"), new { @class = "w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out", multiple = "multiple" })
+
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Images, new { @class = "leading-7 text-base text-gray-300" })
+                @Html.TextBoxFor(m => m.Images, new { @class = "w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out", type = "file", accept = ".jpg,.png,.jpeg,.jfif" })
+                @Html.ValidationMessageFor(m => m.Image, null, new { @class = "text-danger" })
+            </div>
+           
+            <button class="text-white m-auto w-1/4 bg-amber-400 border-0 py-2 px-8  hover:bg-amber-500 rounded text-lg">Add</button>
+            
+        </form>
+    </div>
+</section>
+
+

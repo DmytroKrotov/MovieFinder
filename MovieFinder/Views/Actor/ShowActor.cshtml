@@ -1,0 +1,51 @@
+﻿@model Actor
+
+@{
+    ViewData["Title"] = "Dashboard";
+    
+
+    var actor = Model;
+}
+
+<div>
+
+    <section class="text-gray-400 bg-gray-900 body-font">
+        <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
+            <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src=@actor.Image.Path>
+            <div class="text-center lg:w-2/3 w-full">
+
+                <div class="flex justify-center">
+                    <div class="text-gray-400 bg-gray-900 body-font">
+                        <div class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+                            <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
+                                <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">@actor.Name</h1>
+                                <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">@actor.LastName</h1>
+                                <p class="mt-2 text-sm text-gray-500">@actor.Country @actor.Birthday</p>
+                            </div>
+                            <div class="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
+                                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                                    <h2 class="title-font font-medium text-white tracking-widest text-sm mb-3">MOVIES</h2>
+                                    <nav class="list-none mb-10">
+                                        @foreach (var movie in actor.Movies)
+                                        {
+                                            <li>
+                                                <a class="text-gray-400 hover:text-white">@movie.Name</a>
+                                            </li>
+                                        }
+                                    </nav>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <p class="leading-relaxed mb-8">@actor.Biography</p>
+
+
+            </div>
+        </div>
+    </section>
+</div>
+
+

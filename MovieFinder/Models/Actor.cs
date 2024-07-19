@@ -17,6 +17,8 @@ namespace MovieFinder.Models
         public string Biography { get; set; } = null!;
         public DateTime Birthday { get; set; }
 
+        public Image Image { get; set; }
+
         public List<Movie> Movies { get; set; }
         public List<ActorFact> ActorFacts { get; set; }
 

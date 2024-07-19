@@ -1,0 +1,46 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="bg-neutral-900  text-amber-100 body-font">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+        <a class="flex title-font font-medium items-center text-amber-200 mb-4 md:mb-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-yellow-500 rounded-full" viewBox="0 0 24 24">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+            <span class="ml-3 text-xl">MovieFinder</span>
+        </a>
+        <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
+            <a asp-controller="Home" asp-action="Index" class="mr-5 hover:text-amber-400 hover:font-bold nav-link">Home</a>
+            <a asp-controller="Movie" asp-action="Index" class="mr-5 hover:text-amber-400  hover:font-bold">Movies</a>
+            
+            <a asp-controller="Actor" asp-action="Index" class="mr-5 hover:text-amber-400  hover:font-bold">Actors</a>
+        </nav>
+        <div>
+            @if(User.Identity.IsAuthenticated)
+            {
+                <a asp-controller="Dashboard" asp-action="Index" class="mr-5 hover:text-amber-400 nav-link hover:font-bold">Dashboard</a>
+            }
+            
+            @if(User.Identity.IsAuthenticated)
+            {
+                <a asp-controller="User" asp-action="Logout" class="mr-5 hover:text-amber-400 hover:font-bold">Logout</a>
+            }
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <a asp-controller="User" asp-action="Login" class="mr-5 hover:text-amber-400 hover:font-bold">Login</a>
+                <a asp-controller="User" asp-action="Register" class="mr-5 hover:text-amber-400 hover:font-bold">Register</a>
+            }
+
+            @if(User.Identity.IsAuthenticated)
+            {
+                <span>User: @User.Identity.Name</span>
+            }
+           
+            
+        </div>
+       
+    </div>
+</div>

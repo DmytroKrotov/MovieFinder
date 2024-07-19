@@ -1,4 +1,5 @@
-﻿using MovieFinder.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using MovieFinder.Data;
 using MovieFinder.Models;
 
 namespace MovieFinder.Services.DataServices
@@ -37,6 +38,12 @@ namespace MovieFinder.Services.DataServices
         public void CreateGenre(Genre genre)
         {
             _dbContext.Genres.Add(genre);
+            _dbContext.SaveChanges();
+        }
+
+        public void CreateGenreName(GenreName genreName)
+        {
+            _dbContext.GenreNames.Add(genreName);
             _dbContext.SaveChanges();
         }
 
@@ -79,6 +86,12 @@ namespace MovieFinder.Services.DataServices
         public void CreateWorldRating(WorldRating worldRating)
         {
             _dbContext.WorldRatings.Add(worldRating);
+            _dbContext.SaveChanges();
+        }
+
+        public void CreateWorldRatingName(WorldRatingName worldRatingName)
+        {
+            _dbContext.WorldRatingNames.Add(worldRatingName);
             _dbContext.SaveChanges();
         }
 
@@ -133,6 +146,16 @@ namespace MovieFinder.Services.DataServices
             }
         }
 
+        public void DeleteGenreName(int id)
+        {
+            var genre = _dbContext.GenreNames.FirstOrDefault(a => a.Id == id);
+            if (genre != null)
+            {
+                _dbContext.GenreNames.Remove(genre);
+                _dbContext.SaveChanges();
+            }
+        }
+
         public void DeleteImage(int id)
         {
             var image = _dbContext.Images.FirstOrDefault(a => a.Id == id);
@@ -175,12 +198,7 @@ namespace MovieFinder.Services.DataServices
 
         public void DeleteUser(int id)
         {
-            var user = _dbContext.Users.FirstOrDefault(a => a.Id == id);
-            if (user != null)
-            {
-                _dbContext.Users.Remove(user);
-                _dbContext.SaveChanges();
-            }
+            
         }
 
         public void DeleteViewing(int id)
@@ -203,9 +221,19 @@ namespace MovieFinder.Services.DataServices
             }
         }
 
+        public void DeleteWorldRatingName(int id)
+        {
+            var worldRating = _dbContext.WorldRatingNames.FirstOrDefault(a => a.Id == id);
+            if (worldRating != null)
+            {
+                _dbContext.WorldRatingNames.Remove(worldRating);
+                _dbContext.SaveChanges();
+            }
+        }
+
         public Actor GetActor(int id)
         {
-            var actor = _dbContext.Actors.FirstOrDefault(a => a.Id == id);
+            var actor = _dbContext.Actors.Include(i=>i.Image).Include(i => i.Movies).Include(i => i.ActorFacts).FirstOrDefault(a => a.Id == id);
             return actor;
         }
 
@@ -222,7 +250,7 @@ namespace MovieFinder.Services.DataServices
 
         public IEnumerable<Actor> GetActors()
         {
-            return _dbContext.Actors.ToList();
+            return _dbContext.Actors.Include(i=>i.Image).Include(i => i.Movies).Include(i => i.ActorFacts).ToList();
         }
 
         public Comment GetComment(int id)
@@ -238,12 +266,12 @@ namespace MovieFinder.Services.DataServices
 
         public IEnumerable<Dislike> GetDislikes()
         {
-            return _dbContext.Dislikes.ToList();
+            return _dbContext.Dislikes.Include(d=>d.User).Include(d=>d.Movie).ToList();
         }
 
         public Dislike GetDislikes(int id)
         {
-            var dislike = _dbContext.Dislikes.FirstOrDefault(a => a.Id == id);
+            var dislike = _dbContext.Dislikes.Include(d => d.User).Include(d => d.Movie).FirstOrDefault(a => a.Id == id);
             return dislike;
         }
 
@@ -251,6 +279,17 @@ namespace MovieFinder.Services.DataServices
         {
             var genre = _dbContext.Genres.FirstOrDefault(a => a.Id == id);
             return genre;
+        }
+
+        public GenreName GetGenreName(int id)
+        {
+            var genre = _dbContext.GenreNames.FirstOrDefault(a => a.Id == id);
+            return genre;
+        }
+
+        public IEnumerable<GenreName> GetGenreNames()
+        {
+            return _dbContext.GenreNames.ToList();
         }
 
         public IEnumerable<Genre> GetGenres()
@@ -271,18 +310,27 @@ namespace MovieFinder.Services.DataServices
 
         public Like GetLike(int id)
         {
-            var like = _dbContext.Likes.FirstOrDefault(a => a.Id == id);
+            var like = _dbContext.Likes.Include(d => d.User).Include(d => d.Movie).FirstOrDefault(a => a.Id == id);
             return like;
         }
 
         public IEnumerable<Like> GetLikes()
         {
-            return _dbContext.Likes.ToList();
+            return _dbContext.Likes.Include(d => d.User).Include(d => d.Movie).ToList();
         }
 
         public Movie GetMovie(int id)
         {
-            var movie = _dbContext.Movies.FirstOrDefault(a => a.Id == id);
+            var movie = _dbContext.Movies
+                .Include(i=>i.Image)
+                .Include(i=>i.Images)
+                .Include(i=>i.Actors)
+                .Include(i => i.Likes)
+                .Include(i => i.Dislikes)
+                .Include(i => i.Viewings)
+                .Include(i => i.Genres)
+                .Include(i => i.WorldRatings)
+                .Include(i=>i.MovieFacts).FirstOrDefault(a => a.Id == id);
             return movie;
         }
 
@@ -299,12 +347,21 @@ namespace MovieFinder.Services.DataServices
 
         public IEnumerable<Movie> GetMovies()
         {
-            return _dbContext.Movies.ToList();
+            return _dbContext.Movies
+                .Include(i => i.Image)
+                .Include(i => i.Images)
+                .Include(i => i.Actors)
+                .Include(i => i.Likes)
+                .Include(i => i.Dislikes)
+                .Include(i => i.Viewings)
+                .Include(i => i.Genres)
+                .Include(i => i.WorldRatings)
+                .Include(i => i.MovieFacts).ToList();
         }
 
         public User GetUser(int id)
         {
-            var user = _dbContext.Users.FirstOrDefault(a => a.Id == id);
+            var user = new User();
             return user;
         }
 
@@ -330,6 +387,17 @@ namespace MovieFinder.Services.DataServices
             return worldRating;
         }
 
+        public WorldRatingName GetWorldRatingName(int id)
+        {
+            var worldRating = _dbContext.WorldRatingNames.FirstOrDefault(a => a.Id == id);
+            return worldRating;
+        }
+
+        public IEnumerable<WorldRatingName> GetWorldRatingNames()
+        {
+            return _dbContext.WorldRatingNames.ToList();
+        }
+
         public IEnumerable<WorldRating> GetWorldRatings()
         {
             return _dbContext.WorldRatings.ToList();
@@ -338,6 +406,7 @@ namespace MovieFinder.Services.DataServices
         public void UpdateActor(Actor actor)
         {
             _dbContext.Actors.Update(actor);
+            _dbContext.SaveChanges();
         }
 
         public void UpdateActorFact(ActorFact actorFact)
@@ -360,6 +429,11 @@ namespace MovieFinder.Services.DataServices
             _dbContext.Genres.Update(genre);
         }
 
+        public void UpdateGenreName(GenreName genreName)
+        {
+            _dbContext.GenreNames.Update(genreName);
+        }
+
         public void UpdateImage(Image image)
         {
             _dbContext.Images.Update(image);
@@ -373,6 +447,7 @@ namespace MovieFinder.Services.DataServices
         public void UpdateMovie(Movie movie)
         {
             _dbContext.Movies.Update(movie);
+            _dbContext.SaveChanges() ;
         }
 
         public void UpdateMovieFact(MovieFact movieFact)
@@ -393,6 +468,11 @@ namespace MovieFinder.Services.DataServices
         public void UpdateWorldRating(WorldRating worldRating)
         {
             _dbContext.WorldRatings.Update(worldRating);
+        }
+
+        public void UpdateWorldRatingName(WorldRatingName worldRatingName)
+        {
+            _dbContext.WorldRatingNames.Update(worldRatingName);
         }
     }
 }

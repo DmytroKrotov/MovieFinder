@@ -1,0 +1,66 @@
+﻿@model List<GenreName>
+
+
+@{
+    ViewData["Title"] = "Dashboard";
+
+    var genres = Model;
+}
+
+
+<div>
+    <partial name="_DashboardNavBar" />
+
+
+
+
+    <section class="text-gray-100 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex m-auto flex-col  w-full mb-50">
+                <h1 class="sm:text-4xl m-auto text-3xl font-medium title-font mb-10 text-gray-100"> Genres</h1>
+
+            </div>
+            <div class="flex m-auto  mb-4 lg:w-2/3 w-full mx-auto">
+
+                <a asp-controller="Dashboard" asp-action="CreateGenreNameManager" class="flex m-auto  font-bold text-white bg-amber-400 border-0 py-2 px-4 w-2/12 hover:bg-amber-500 rounded">
+                    <span class="m-auto">Add genre</span>
+                </a>
+            </div>
+            
+            <div class="overflow-x-auto">
+                    <table class="w-2/3 text-sm text-left text-gray-500 dark:text-gray-400 m-auto">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-4 py-3">Genre id</th>
+                                <th scope="col" class="px-4 py-3">Genre name</th>
+                                <th scope="col" class="px-4 py-3"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if(genres.Count!=0)
+                        {
+                            @foreach(var genre in genres)
+                            {
+                                <tr class="border-b dark:border-gray-700">
+                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">@genre.Id</th>
+                                    <td class="px-4 py-3">@genre.Name</td>
+                                    <td class="px-4 py-3 flex items-center justify-end">
+                                        <a asp-controller="Dashboard" asp-action="DeleteGenreName" asp-route-id="@genre.Id" class="flex m-auto  font-bold text-white bg-amber-400 border-0 py-2 px-4 w-1/2 hover:bg-amber-500 rounded">
+                                            <span class="m-auto">Delete</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                       
+                           
+                           
+                        </tbody>
+                    </table>
+                </div>
+               
+            
+        </div>
+    </section>
+</div>
+

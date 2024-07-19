@@ -20,21 +20,21 @@ namespace MovieFinder.Models
         [Column(TypeName = "nvarchar(1000)")]
         public string ShortDescription { get; set; } = null!;
         public float Money { get; set; }
-        public int ImageId { get; set; }
+       
 
-        public List<Actor> Actors { get; set; }
-        public List<WorldRating> WorldRatings { get; set; }
-        public List<Genre> Genres { get; set; }
-        public List<Like> Likes { get; set; }
-        public List<Dislike> Dislikes { get; set; }
-        public List<Viewing> Viewings { get; set; }
-        public List<Image> Images { get; set; }
-        public List<MovieFact> MovieFacts { get; set; }
-        public List<Comment> Comments { get; set; }
+        public virtual List<Actor> Actors { get; set; }
+        public virtual List<WorldRating> WorldRatings { get; set; }
+        public virtual List<Genre> Genres { get; set; }
+        public virtual List<Like> Likes { get; set; }
+        public virtual List<Dislike> Dislikes { get; set; }
+        public virtual List<Viewing> Viewings { get; set; }
+        public virtual List<Image> Images { get; set; }
+        public virtual List<MovieFact> MovieFacts { get; set; }
+        public virtual List<Comment> Comments { get; set; }
 
 
        
-        public Image Image { get; set; }
+        public virtual Image Image { get; set; }
 
     }
 }

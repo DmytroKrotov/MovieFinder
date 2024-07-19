@@ -1,0 +1,47 @@
+﻿@using MovieFinder.Models.Forms
+
+
+@model LoginForm
+
+@{
+    
+    
+    
+}
+
+    
+
+
+   
+   
+      
+
+    <section class="text-amber-200 body-font ">
+    <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
+       
+        <form method="POST" asp-controller="User" asp-action="Login" enctype="multipart/form-data" class="w-2/3 bg-gray-300/10  rounded-lg p-8 flex flex-col m-auto">
+             <h2 class="text-amber-300 text-xl font-medium title-font mb-5">Login</h2>
+           
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Login, new { @class = "leading-7 text-base text-gray-300" })
+                @Html.TextBoxFor(m => m.Login, new { @class = "w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" })
+                @Html.ValidationMessageFor(m => m.Login, null, new { @class = "text-orange-500" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Password, new { @class = "leading-7 text-base text-gray-300" })
+                @Html.TextBoxFor(m => m.Password, new { @class = "w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" })
+                @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-orange-500" })
+            </div>
+
+           
+           
+           
+            <button class="text-white m-auto w-1/4 bg-amber-400 border-0 py-2 px-8  hover:bg-amber-500 rounded text-lg">Login</button>
+            
+        </form>
+    </div>
+</section>
+
+   
+
+

@@ -1,0 +1,19 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="text-gray-600 body-font">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+        <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+            <a asp-controller="Dashboard" asp-action="MoviesManager" class="mr-5 text-lg hover:text-amber-400 hover:text-xl hover:font-bold nav-link">Movies</a>
+            <a asp-controller="Dashboard" asp-action="ActorsManager" class="mr-5 text-lg hover:text-amber-400 hover:text-xl hover:font-bold nav-link">Actors</a>
+            <a asp-controller="Dashboard" asp-action="GenreNameManager" class="mr-5 text-lg hover:text-amber-400 hover:text-xl hover:font-bold nav-link">Genres</a>
+            
+            <a asp-controller="User" asp-action="ShowUsers" class="mr-5 text-lg hover:text-amber-400 hover:text-xl hover:font-bold nav-link">Users</a>
+            <a asp-controller="Roles" asp-action="ShowRoles" class="mr-5 text-lg hover:text-amber-400 hover:text-xl hover:font-bold nav-link">Roles</a>
+            <a asp-controller="Dashboard" asp-action="WorldRatingNameManager" class="mr-5 text-lg hover:text-amber-400 hover:text-xl hover:font-bold nav-link">WorldRatings</a>
+        </nav>
+    </div>
+</div>

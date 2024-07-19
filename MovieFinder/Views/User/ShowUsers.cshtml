@@ -1,0 +1,65 @@
+﻿@model List<User>
+@{
+    ViewData["Title"] = "Users";
+    
+
+    var users = Model;
+}
+
+
+<div>
+    <partial name="_DashboardNavBar" />
+
+
+
+
+    <section class="text-gray-100 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex m-auto flex-col  w-full mb-50">
+                <h1 class="sm:text-4xl m-auto text-3xl font-medium title-font mb-10 text-gray-100"> Users</h1>
+
+            </div>
+           
+            
+            <div class="overflow-x-auto">
+                    <table class="w-2/3 text-sm text-left text-gray-500 dark:text-gray-400 m-auto">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-4 py-3">User id</th>
+                                <th scope="col" class="px-4 py-3">User name</th>
+                                
+                                <th scope="col" class="px-4 py-3"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if(users.Count!=0)
+                        {
+                            @foreach(var user in users)
+                            {
+                                <tr class="border-b dark:border-gray-700">
+                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">@user.Id</th>
+                                    <td class="px-4 py-3">@user.UserName</td>
+                                   
+                                    <td class="px-4 py-3 flex items-center justify-end">
+                                        <form class="mt-auto mb-auto me-1  w-1/2" method="post" enctype="multipart/form-data" asp-controller="User" asp-action="Edit" asp-route-id="@user.Id">
+                                            <button class="flex m-auto  font-bold text-white bg-amber-400 border-0 py-2 px-4 w-1/2 hover:bg-amber-500 rounded" type="submit">Edit</button>
+                                        </form>
+                                        <form class="mt-auto mb-auto me-1  w-1/2" method="post" enctype="multipart/form-data" asp-controller="User" asp-action="Delete" asp-route-id="@user.Id">
+                                            <button class="flex m-auto  font-bold text-white bg-amber-400 border-0 py-2 px-4 w-1/2 hover:bg-amber-500 rounded" type="submit">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                       
+                           
+                           
+                        </tbody>
+                    </table>
+                </div>
+               
+            
+        </div>
+    </section>
+</div>
+

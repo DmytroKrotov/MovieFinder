@@ -7,9 +7,13 @@ namespace MovieFinder.Models
     {
         [Key]
         public int Id { get; set; }
-        [Column(TypeName = "nvarchar(200)")]
-        public string Path { get; set; }
+        
         [Column(TypeName = "nvarchar(200)")]
         public string Name { get; set; }
+
+        [Column(TypeName = "nvarchar(200)")]
+        public string Path => "/uploads/" + Name;
+
+
     }
 }

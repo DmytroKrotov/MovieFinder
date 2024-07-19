@@ -1,0 +1,89 @@
+﻿@model List<Actor>
+
+@{
+    ViewData["Title"] = "Dashboard";
+    
+
+    var actors = Model;
+}
+
+<div>
+    <partial name="_DashboardNavBar" />
+
+    <section class="text-gray-100 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex m-auto flex-col  w-full mb-50">
+                <h1 class="sm:text-4xl m-auto text-3xl font-medium title-font mb-10 text-gray-100"> Actors</h1>
+
+            </div>
+            <div class="flex m-auto  mb-4 lg:w-2/3 w-full mx-auto">
+
+                <a asp-controller="Dashboard" asp-action="CreateActorManager" class="flex m-auto  font-bold text-white bg-amber-400 border-0 py-2 px-4 w-2/12 hover:bg-amber-500 rounded">
+                    <span class="m-auto">Add actor</span>
+                </a>
+            </div>
+            <div class="container px-5 py-24 mx-auto inline-flex">
+
+                @foreach (var actor in actors)
+                {
+                    <div class="flex w-1/3 ">
+                        <div class="p-4 w-full">
+                            <div class="h-full border-2 border-gray-800 rounded-lg overflow-hidden">
+                                <div class="lg:h-34 md:h-26 w-full p-1">
+                                    @if (actor.Image != null)
+                                    {
+                                        <img class="m-auto h-64  object-center rounded-lg" src='@actor.Image.Path' alt="blog">
+                                    }
+                                    else
+                                    {
+                                        <img class="lg:h-34 md:h-26 w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="no image">
+                                    }
+
+                                </div>
+
+                                <div class="p-6">
+                                    <h1 class="title-font text-lg font-medium text-white mb-3">@actor.Name</h1>
+                                    <h1 class="title-font text-lg font-medium text-white mb-3">@actor.LastName</h1>
+                                    @if (actor.Movies != null)
+                                    {
+                                        @foreach (var movie in actor.Movies)
+                                        {
+                                            <h2 class="tracking-widest text-xs title-font font-medium text-gray-500 mb-1">@movie.Name</h2>
+                                        }
+                                    }
+
+
+
+                                    <p class="leading-relaxed mb-3">@actor.Country</p>
+                                    <div class="flex items-center flex-wrap ">
+                                        <a asp-controller="Dashboard" asp-action="EditActor" asp-route-id="@actor.Id" class="text-yellow-400 inline-flex items-center md:mb-2 lg:mb-0">
+                                            Edit
+                                            <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M5 12h14"></path>
+                                                <path d="M12 5l7 7-7 7"></path>
+                                            </svg>
+                                        </a>
+
+                                        <a asp-controller="Dashboard" asp-action="DeleteActor" asp-route-id="@actor.Id" class="text-yellow-400 inline-flex items-center md:mb-2 lg:mb-0">
+                                            Delete
+                                            <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M5 12h14"></path>
+                                                <path d="M12 5l7 7-7 7"></path>
+                                            </svg>
+                                        </a>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </section>
+</div>
+
+
