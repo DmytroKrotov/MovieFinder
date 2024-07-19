@@ -28,13 +28,12 @@
             </div>
            
 
-            <div class="container px-5 py-24 mx-auto inline-flex">
+            <div class="grid grid-cols-4 gap-4">
 
                 @foreach(var movie in movies)
                 {
-                    <div class="flex w-1/3 ">
-                        <div class="p-4 w-full">
-                            <div class="h-full border-2 border-gray-800 rounded-lg overflow-hidden">
+                    <div class="border-2 border-gray-800 rounded-lg overflow-hidden">
+                        
                                 <div class="lg:h-34 md:h-26 w-full p-1">
                                     @if(movie.Image!=null)
                                     {
@@ -96,10 +95,10 @@
                                         </span>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-
                     </div>
+                        
+
+                    
                 }
 
                

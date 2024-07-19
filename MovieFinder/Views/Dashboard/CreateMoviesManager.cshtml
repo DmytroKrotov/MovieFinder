@@ -65,7 +65,7 @@
             </div>
             <div class="mb-3">
                 @Html.LabelFor(m => m.Actors, new { @class = "leading-7 text-base text-gray-300" })
-                @Html.ListBoxFor(m => m.Actors, new SelectList(actors, "Id", "Name", "LastName"), new { @class = "w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out", multiple = "multiple" })
+                @Html.ListBoxFor(m => m.Actors, new SelectList(actors, "Id","LastName"), new { @class = "w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out", multiple = "multiple" })
 
             </div>
             <div class="mb-3">

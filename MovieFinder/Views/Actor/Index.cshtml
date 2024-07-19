@@ -11,15 +11,15 @@
 
     <section class="text-gray-100 body-font">
         <div class="container px-5 py-24 mx-auto">
-           
-            <div class="container px-5 py-24 mx-auto inline-flex">
+
+            <div class="grid grid-cols-4 gap-4">
 
                 @foreach (var actor in actors)
                 {
-                    <div class="flex w-1/3 ">
-                        <div class="p-4 w-full">
-                            <div class="h-full border-2 border-gray-800 rounded-lg overflow-hidden">
-                                <div class="lg:h-34 md:h-26 w-full p-1">
+                    <div class="border-2 border-gray-800 rounded-lg overflow-hidden">
+
+
+                        <div class="lg:h-34 md:h-26 w-full p-1">
                                     @if (actor.Image != null)
                                     {
                                         <img class="m-auto h-64  object-center rounded-lg" src='@actor.Image.Path' alt="blog">
@@ -56,10 +56,10 @@
                                        
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-
                     </div>
+                        
+
+                    
                 }
 
 
